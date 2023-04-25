@@ -1,0 +1,53 @@
+CREATE DATABASE StarDeckDB;
+GO
+
+USE StarDeckDB;
+GO
+
+CREATE TABLE CARTA
+(
+	Nombre			NVARCHAR(30)	NOT NULL,
+	Descripcion		NVARCHAR(1000)	NOT NULL,
+	Estado			NVARCHAR(10)	NOT NULL	DEFAULT 'Activa',
+	Energia			INT				NOT NULL,
+	CostoBatalla	INT				NOT	NULL,
+	TipoCarta		NVARCHAR(10)	NOT NULL,
+	Raza			NVARCHAR(25)	NOT NULL,
+	ID				NVARCHAR(14)	NOT NULL,
+	Imagen			NVARCHAR(100)	NOT NULL,
+	PRIMARY KEY(ID)
+);
+
+CREATE TABLE USUARIO
+(
+	NombreCompleto	NVARCHAR(100)	NOT NULL,
+	NombreUsuario	NVARCHAR(30)	NOT NULL,
+	Nacionalidad	NVARCHAR(14)	NOT NULL,
+	ID				NVARCHAR(14)	NOT NULL,
+	Contrasena		NVARCHAR(8)		NOT NULL,
+	Imagen			NVARCHAR(100)			,
+	Estado			NVARCHAR(10)	NOT NULL	DEFAULT 'Activa',
+	Ranking			INT				NOT NULL	DEFAULT 0,
+	Monedas			INT				NOT NULL	DEFAULT 20,
+	PRIMARY KEY(ID)
+);
+
+CREATE TABLE CARTAS_USUARIO
+(
+	ID_Carta		NVARCHAR(14)	NOT NULL,
+	ID_Usuario		NVARCHAR(14)	NOT NULL,
+	PRIMARY KEY(ID_Carta, ID_Usuario)
+);
+
+----------------------------------------------
+--				FOREIGN KEYS				--
+----------------------------------------------
+
+
+ALTER TABLE CARTAS_USUARIO
+ADD CONSTRAINT FK_ID_Usuario FOREIGN KEY (ID_Usuario)
+REFERENCES USUARIO(ID);
+
+ALTER TABLE CARTAS_USUARIO
+ADD CONSTRAINT FK_ID_Carta FOREIGN KEY (ID_Carta)
+REFERENCES CARTA(ID);
