@@ -12,16 +12,16 @@ namespace RESTAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
         private readonly ToDoDbContext _context;
 
-        public UsuariosController(ToDoDbContext context)
+        public UsuarioController(ToDoDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Usuario
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
         {
@@ -32,7 +32,7 @@ namespace RESTAPI.Controllers
             return await _context.Usuario.ToListAsync();
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Usuario/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(string id)
         {
@@ -50,7 +50,7 @@ namespace RESTAPI.Controllers
             return usuario;
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Usuario/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(string id, Usuario usuario)
@@ -81,7 +81,7 @@ namespace RESTAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Usuario
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
@@ -110,7 +110,7 @@ namespace RESTAPI.Controllers
             return CreatedAtAction("GetUsuario", new { id = usuario.id_usuario }, usuario);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Usuario/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario(string id)
         {

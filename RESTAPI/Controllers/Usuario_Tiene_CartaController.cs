@@ -12,16 +12,16 @@ namespace RESTAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Usuario_Tiene_CartasController : ControllerBase
+    public class Usuario_Tiene_CartaController : ControllerBase
     {
         private readonly ToDoDbContext _context;
 
-        public Usuario_Tiene_CartasController(ToDoDbContext context)
+        public Usuario_Tiene_CartaController(ToDoDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuario_Tiene_Cartas
+        // GET: api/Usuario_Tiene_Carta
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario_Tiene_Carta>>> GetUsuario_Tiene_Carta()
         {
@@ -32,7 +32,7 @@ namespace RESTAPI.Controllers
             return await _context.Usuario_Tiene_Carta.ToListAsync();
         }
 
-        // GET: api/Usuario_Tiene_Cartas/5
+        // GET: api/Usuario_Tiene_Carta/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario_Tiene_Carta>> GetUsuario_Tiene_Carta(string id)
         {
@@ -50,7 +50,7 @@ namespace RESTAPI.Controllers
             return usuario_Tiene_Carta;
         }
 
-        // PUT: api/Usuario_Tiene_Cartas/5
+        // PUT: api/Usuario_Tiene_Carta/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario_Tiene_Carta(string id, Usuario_Tiene_Carta usuario_Tiene_Carta)
@@ -81,7 +81,7 @@ namespace RESTAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuario_Tiene_Cartas
+        // POST: api/Usuario_Tiene_Carta
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Usuario_Tiene_Carta>> PostUsuario_Tiene_Carta(Usuario_Tiene_Carta usuario_Tiene_Carta)
@@ -110,7 +110,7 @@ namespace RESTAPI.Controllers
             return CreatedAtAction("GetUsuario_Tiene_Carta", new { id = usuario_Tiene_Carta.id_usuario }, usuario_Tiene_Carta);
         }
 
-        // DELETE: api/Usuario_Tiene_Cartas/5
+        // DELETE: api/Usuario_Tiene_Carta/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario_Tiene_Carta(string id)
         {

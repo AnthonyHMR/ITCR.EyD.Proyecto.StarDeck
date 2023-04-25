@@ -12,16 +12,16 @@ namespace RESTAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartasController : ControllerBase
+    public class CartaController : ControllerBase
     {
         private readonly ToDoDbContext _context;
 
-        public CartasController(ToDoDbContext context)
+        public CartaController(ToDoDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Cartas
+        // GET: api/Carta
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Carta>>> GetCarta()
         {
@@ -32,7 +32,7 @@ namespace RESTAPI.Controllers
             return await _context.Carta.ToListAsync();
         }
 
-        // GET: api/Cartas/5
+        // GET: api/Carta/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Carta>> GetCarta(string id)
         {
@@ -50,7 +50,7 @@ namespace RESTAPI.Controllers
             return carta;
         }
 
-        // PUT: api/Cartas/5
+        // PUT: api/Carta/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCarta(string id, Carta carta)
@@ -81,7 +81,7 @@ namespace RESTAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Cartas
+        // POST: api/Carta
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Carta>> PostCarta(Carta carta)
@@ -110,7 +110,7 @@ namespace RESTAPI.Controllers
             return CreatedAtAction("GetCarta", new { id = carta.id_carta }, carta);
         }
 
-        // DELETE: api/Cartas/5
+        // DELETE: api/Carta/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCarta(string id)
         {
