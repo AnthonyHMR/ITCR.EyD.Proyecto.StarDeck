@@ -14,40 +14,56 @@ public class RegisterUI : MonoBehaviour
     private NationalityBtn _selectedNationality = new NationalityBtn();
     private int _passwordLength = 8;
 
+    // API
+    private bool _checkData = false;
+
     public void RegisterAccount ()
     {
+        _checkData = true;
+
         // Username restrictions
         if (_usernameIF.text.Length < _nameLimits[0] || _usernameIF.text.Length > _nameLimits[1])
         {
             Debug.Log("Invalid: Username");
+            _checkData = false;
         }
 
         // Name restrictions
         if (_nameIF.text.Length < _nameLimits[0] || _nameIF.text.Length > _nameLimits[1])
         {
             Debug.Log("Invalid: Name");
+            _checkData = false;
         }
 
         // Nationality restrictions
         if (_selectedNationality.GetNationality() == null)
         {
             Debug.Log("Invalid: Nationality not selected");
+            _checkData = false;
         }
 
         // Password restrictions
         if (_passwordIF.text.Length != _passwordLength)
         {
             Debug.Log("Invalid: Password");
+            _checkData = false;
         }
 
         // Confirm password restrictions
         if (_confirmIF.text.Length == 0)
         {
             Debug.Log("Invalid: Confirm password empty");
+            _checkData = false;
         }
         else if (_confirmIF.text != _passwordIF.text)
         {
             Debug.Log("Invalid: Password not confirmed");
+            _checkData = false;
+        }
+
+        if (_checkData)
+        {
+            // API call
         }
     }
 
