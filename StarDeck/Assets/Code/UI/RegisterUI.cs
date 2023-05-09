@@ -1,5 +1,9 @@
 using UnityEngine;
 using TMPro;
+//using Code.Models;
+using UnityEngine.UI;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class RegisterUI : MonoBehaviour
 {
@@ -16,9 +20,24 @@ public class RegisterUI : MonoBehaviour
 
     // API
     private bool _checkData = false;
+    // URL del api
+    private string url = "https://localhost:7098/api/Usuario";
 
     public void RegisterAccount ()
     {
+        Usuario user = new Usuario();
+        user.id_usuario = "5";
+        user.nombre_usuario = "Anthony";
+        user.nombre_completo = "Anthony Montero";
+        user.nacionalidad = "Costa Rica";
+        user.contrasena = "12345678";
+        user.imagen = "imagen";
+        user.estado = "activo";
+        user.ranking = 20;
+        user.monedas = 30;
+
+        var body = JsonUtility.ToJson(user);
+
         _checkData = true;
 
         // Username restrictions
@@ -64,6 +83,9 @@ public class RegisterUI : MonoBehaviour
         if (_checkData)
         {
             // API call
+            Debug.Log("OK");
+            //StartCoroutine(GetData());
+            StartCoroutine(PostData(body));
         }
     }
 
@@ -80,6 +102,45 @@ public class RegisterUI : MonoBehaviour
                 _selectedNationality.Deselect();
             nationality.Select();
             _selectedNationality = nationality;
+        }
+    }
+
+    IEnumerator GetData()
+    {
+        using(UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if(request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.LogError(request.error);
+            }
+            else
+            {
+                string results = request.downloadHandler.text;
+
+                Debug.Log(results);
+            }
+        }
+    }
+
+    IEnumerator PostData(string json)
+    {
+        var uwr = new UnityWebRequest(url, "POST");
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log(uwr.error);
+        }
+        else
+        {
+            Debug.Log("Form Uploaded complete!");
         }
     }
 }
