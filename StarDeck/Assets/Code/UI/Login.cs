@@ -7,6 +7,7 @@ public class Login : MonoBehaviour
     // Data fields
     [SerializeField] private TMP_InputField _usernameIF;
     [SerializeField] private TMP_InputField _passwordIF;
+    [SerializeField] private UIManager _uiManager;
 
     // Restrictions variables
     private int[] _nameLimits = {1, 30};
@@ -36,6 +37,8 @@ public class Login : MonoBehaviour
         {
             // API call
             Debug.Log("OK");
+
+            _uiManager.SwitchTo(2);
         }
     }
 }
