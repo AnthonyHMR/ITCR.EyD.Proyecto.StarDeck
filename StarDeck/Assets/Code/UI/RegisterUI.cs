@@ -17,6 +17,7 @@ public class RegisterUI : MonoBehaviour
     private int[] _nameLimits = {1, 30};
     private NationalityBtn _selectedNationality = new NationalityBtn();
     private int _passwordLength = 8;
+    private Utility _utility = new Utility();
 
     // API
     private bool _checkData = false;
@@ -26,7 +27,7 @@ public class RegisterUI : MonoBehaviour
     public void RegisterAccount ()
     {
         Usuario user = new Usuario();
-        user.id_usuario = "5";
+        user.id_usuario = Utility.GenerateRandomID();
         user.nombre_usuario = "Anthony";
         user.nombre_completo = "Anthony Montero";
         user.nacionalidad = "Costa Rica";
@@ -46,6 +47,10 @@ public class RegisterUI : MonoBehaviour
             Debug.Log("Invalid: Username");
             _checkData = false;
         }
+        else
+        {
+            user.nombre_usuario = _usernameIF.text;
+        }
 
         // Name restrictions
         if (_nameIF.text.Length < _nameLimits[0] || _nameIF.text.Length > _nameLimits[1])
@@ -53,12 +58,20 @@ public class RegisterUI : MonoBehaviour
             Debug.Log("Invalid: Name");
             _checkData = false;
         }
+        else
+        {
+            user.nombre_completo = _nameIF.text;
+        }
 
         // Nationality restrictions
         if (_selectedNationality.GetNationality() == null)
         {
             Debug.Log("Invalid: Nationality not selected");
             _checkData = false;
+        }
+        else
+        {
+            user.nacionalidad = _selectedNationality.GetNationality();
         }
 
         // Password restrictions
@@ -78,6 +91,10 @@ public class RegisterUI : MonoBehaviour
         {
             Debug.Log("Invalid: Password not confirmed");
             _checkData = false;
+        }
+        else
+        {
+            user.contrasena = _passwordIF.text;
         }
 
         if (_checkData)
