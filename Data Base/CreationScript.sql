@@ -39,10 +39,40 @@ CREATE TABLE USUARIO_TIENE_CARTA
 	PRIMARY KEY(id_usuario, id_carta)
 );
 
+CREATE TABLE DECK
+(
+	id_deck			NVARCHAR(14)	NOT NULL,
+	nombre_deck		NVARCHAR(30)	NOT NULL,
+	PRIMARY KEY(id_deck)
+);
+
+CREATE TABLE CARTAS_DECK
+(
+	id_deck		NVARCHAR(14)	NOT NULL,
+	id_carta	NVARCHAR(14)	NOT NULL,
+	PRIMARY KEY(id_deck,id_carta)
+);
+
+CREATE TABLE DECK_USUARIO
+(
+	id_usuario	NVARCHAR(14)	NOT NULL,
+	id_deck		NVARCHAR(14)	NOT NULL,
+	PRIMARY KEY(id_deck,id_usuario)
+);
+
+CREATE TABLE PLANETA
+(
+	id_planeta		NVARCHAR(14)	NOT NULL,
+	nombre_planeta	NVARCHAR(30)	NOT NULL,
+	descripcion		NVARCHAR(1000)	NOT NULL,
+	imagen			NVARCHAR(100)	NOT NULL,
+	tipo			NVARCHAR(7)	NOT NULL,
+	PRIMARY KEY(id_planeta)
+);
+
 ----------------------------------------------
 --				FOREIGN KEYS				--
 ----------------------------------------------
-
 
 ALTER TABLE USUARIO_TIENE_CARTA
 ADD CONSTRAINT FK_ID_Usuario FOREIGN KEY (id_usuario)
@@ -52,6 +82,22 @@ ALTER TABLE USUARIO_TIENE_CARTA
 ADD CONSTRAINT FK_ID_Carta FOREIGN KEY (id_carta)
 REFERENCES CARTA(id_carta);
 
+ALTER TABLE CARTAS_DECK
+ADD CONSTRAINT FK_ID_Deck FOREIGN KEY (id_deck)
+REFERENCES DECK(id_deck);
+
+ALTER TABLE CARTAS_DECK
+ADD CONSTRAINT FK_ID_Carta_Deck FOREIGN KEY (id_carta)
+REFERENCES CARTA(id_carta);
+
+ALTER TABLE DECK_USUARIO
+ADD CONSTRAINT FK_Usuario_Deck FOREIGN KEY (id_deck)
+REFERENCES DECK(id_deck);
+
+ALTER TABLE DECK_USUARIO
+ADD CONSTRAINT FK_Usuario_Deck_User FOREIGN KEY (id_usuario)
+REFERENCES USUARIO(id_usuario);
+GO
 ----------------------------------------------
 --                PROCEDURES                --
 ----------------------------------------------
