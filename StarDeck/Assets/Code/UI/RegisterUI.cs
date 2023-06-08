@@ -37,8 +37,6 @@ public class RegisterUI : MonoBehaviour
         user.ranking = 20;
         user.monedas = 30;
 
-        var body = JsonUtility.ToJson(user);
-
         _checkData = true;
 
         // Username restrictions
@@ -96,6 +94,9 @@ public class RegisterUI : MonoBehaviour
         {
             user.contrasena = _passwordIF.text;
         }
+
+        
+        var body = JsonUtility.ToJson(user);
 
         if (_checkData)
         {

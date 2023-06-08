@@ -26,7 +26,7 @@ public class CardBtn : MonoBehaviour
                 card.transform.SetParent(_deckCards.transform);
             }
         }
-        
+
     }
 
     public void SetIsOnDeck (bool state)

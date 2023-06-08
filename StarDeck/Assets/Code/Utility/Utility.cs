@@ -28,7 +28,7 @@ public class Utility
             .Select(s => s[random.Next(s.Length)]).ToArray());
 
         // Insert the "U" at the beginning of the string
-        randomString = "U" + randomString;
+        randomString = "U-" + randomString;
 
         // Make sure the string does not contain any consecutive characters
         for (int i = 0; i < randomString.Length - 1; i++)
